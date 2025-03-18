@@ -460,17 +460,39 @@ button {
 }
 
 /* Process section */
+.customer-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-direction: row; /* Изменено с row-reverse на row */
+}
+
+.customer-content {
+  flex: 1;
+  max-width: 48%;
+}
+
+.customer-image {
+  flex: 1;
+  max-width: 48%;
+  text-align: left;
+}
+
+/* Process section - финальная версия */
 .process-section {
   padding: 80px 0;
   text-align: center;
+  background-color: #fff;
 }
 
 .process-title {
   font-size: 32px;
   line-height: 1.2;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   text-align: center;
   color: #22343d;
+  font-weight: 700;
 }
 
 .process-text {
@@ -482,40 +504,167 @@ button {
 }
 
 .process-list-wrapper {
-  margin: 50px 0;
+  margin: 50px auto;
+  max-width: 980px;
+  padding: 0 15px;
 }
 
 .process-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px 30px;
 }
 
 .process-item {
   display: flex;
   align-items: center;
-  width: 240px;
-  margin-bottom: 20px;
+}
+
+/* Первый элемент: картинка слева от текста */
+.process-item:nth-child(1) {
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-right: 20px;
+}
+
+/* Второй элемент: картинка справа от текста */
+.process-item:nth-child(2) {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+/* Третий элемент: картинка слева от текста */
+.process-item:nth-child(3) {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  padding-right: 20px;
+}
+
+/* Четвертый элемент: картинка справа от текста */
+.process-item:nth-child(4) {
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-left: 20px;
 }
 
 .process-img {
   width: 98px;
   height: 98px;
   border-radius: 50%;
-  margin-right: 15px;
   object-fit: cover;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.process-item:nth-child(odd) .process-img {
+  margin-right: 20px;
+}
+
+.process-item:nth-child(even) .process-img {
+  margin-left: 20px;
+}
+
+.process-item p {
+  background-color: #fff;
+  padding: 15px 25px;
+  border-radius: 26px; /* Увеличиваем радиус для большего закругления */
+  font-size: 16px;
+  color: #22343d;
+  font-weight: 500;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  position: relative;
+  text-align: center;
+  white-space: nowrap; /* Текст в одну строку */
+  flex-grow: 1; /* Растягиваем на доступное пространство */
+  max-width: none;
+}
+
+/* Треугольник для бабблов (как на стикере) */
+.process-item:nth-child(1) p::before,
+.process-item:nth-child(3) p::before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #fff;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  z-index: -1;
+  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.process-item:nth-child(2) p::before,
+.process-item:nth-child(4) p::before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #fff;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  z-index: -1;
+  box-shadow: 2px -2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .process-button {
   background-color: #02897a;
   color: #ffffff;
   display: inline-block;
-  margin: 20px auto 0;
-  padding: 12px 30px;
+  margin: 30px auto 0;
+  padding: 15px 34px;
   border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
+.process-button:hover {
+  background-color: #016d62;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+  .process-item p {
+    white-space: normal;
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .process-list {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .process-item:nth-child(n) {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0;
+  }
+
+  .process-item:nth-child(n) .process-img {
+    margin-right: 20px;
+    margin-left: 0;
+  }
+
+  .process-item p {
+    white-space: normal;
+  }
+
+  .process-item:nth-child(n) p::before {
+    left: -5px;
+    right: auto;
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.05);
+  }
+}
 /* Contents Strategies section */
 .contents-section {
   padding: 80px 0;
